@@ -1,0 +1,1810 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File Processing - Complete Revision Guide</title>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700&family=Source+Sans+3:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #f8f6f3;
+            --bg-secondary: #ffffff;
+            --bg-accent: #e8f4f8;
+            --bg-highlight: #fff4e6;
+            --text-primary: #2c3e50;
+            --text-secondary: #546e7a;
+            --text-muted: #78909c;
+            --border-light: #d7ccc8;
+            --border-medium: #bcaaa4;
+            --accent-blue: #4a90a4;
+            --accent-green: #7cb342;
+            --accent-orange: #ff9800;
+            --accent-red: #e57373;
+            --shadow: rgba(0, 0, 0, 0.08);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Source Sans 3', sans-serif;
+            background: linear-gradient(135deg, var(--bg-primary) 0%, #faf9f7 100%);
+            color: var(--text-primary);
+            line-height: 1.75;
+            font-size: 17px;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: var(--bg-secondary);
+            border-radius: 16px;
+            box-shadow: 0 8px 32px var(--shadow);
+            padding: 60px;
+        }
+
+        h1 {
+            font-family: 'Merriweather', serif;
+            font-size: 3.2em;
+            color: var(--accent-blue);
+            margin-bottom: 20px;
+            font-weight: 700;
+            text-align: center;
+            letter-spacing: -1px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 1.2em;
+            margin-bottom: 50px;
+            font-weight: 300;
+        }
+
+        h2 {
+            font-family: 'Merriweather', serif;
+            font-size: 2.2em;
+            color: var(--accent-blue);
+            margin: 60px 0 30px 0;
+            padding-bottom: 15px;
+            border-bottom: 3px solid var(--accent-blue);
+            font-weight: 700;
+        }
+
+        h3 {
+            font-size: 1.6em;
+            color: var(--accent-green);
+            margin: 40px 0 20px 0;
+            font-weight: 600;
+        }
+
+        h4 {
+            font-size: 1.3em;
+            color: var(--text-primary);
+            margin: 30px 0 15px 0;
+            font-weight: 600;
+        }
+
+        p {
+            margin-bottom: 18px;
+            color: var(--text-secondary);
+            text-align: justify;
+        }
+
+        .key-concept {
+            background: var(--bg-accent);
+            border-left: 5px solid var(--accent-blue);
+            padding: 25px;
+            margin: 25px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px var(--shadow);
+        }
+
+        .exam-focus {
+            background: var(--bg-highlight);
+            border-left: 5px solid var(--accent-orange);
+            padding: 25px;
+            margin: 25px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px var(--shadow);
+        }
+
+        .exam-focus::before {
+            content: "⭐ EXAM FOCUS";
+            display: block;
+            font-weight: 700;
+            color: var(--accent-orange);
+            margin-bottom: 12px;
+            font-size: 0.95em;
+            letter-spacing: 1px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 30px 0;
+            background: var(--bg-secondary);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 12px var(--shadow);
+        }
+
+        th {
+            background: linear-gradient(135deg, var(--accent-blue), #3a7a8e);
+            color: white;
+            padding: 18px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 1.05em;
+        }
+
+        td {
+            padding: 16px 18px;
+            border-bottom: 1px solid var(--border-light);
+            color: var(--text-secondary);
+        }
+
+        tr:hover {
+            background: var(--bg-accent);
+            transition: background 0.3s ease;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        .code-block {
+            background: #2d3436;
+            color: #dfe6e9;
+            padding: 25px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.95em;
+            margin: 25px 0;
+            overflow-x: auto;
+            box-shadow: 0 4px 16px var(--shadow);
+            line-height: 1.6;
+        }
+
+        .formula {
+            background: #f5f5f5;
+            border: 2px solid var(--border-medium);
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            text-align: center;
+            font-size: 1.15em;
+            color: var(--text-primary);
+        }
+
+        ul, ol {
+            margin: 20px 0 20px 40px;
+            color: var(--text-secondary);
+        }
+
+        li {
+            margin: 12px 0;
+            line-height: 1.7;
+        }
+
+        .comparison-table {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin: 30px 0;
+        }
+
+        .comparison-card {
+            background: var(--bg-secondary);
+            padding: 25px;
+            border-radius: 8px;
+            border: 2px solid var(--border-light);
+            box-shadow: 0 2px 12px var(--shadow);
+        }
+
+        .comparison-card h4 {
+            color: var(--accent-blue);
+            margin-top: 0;
+        }
+
+        .visual-diagram {
+            background: var(--bg-accent);
+            padding: 30px;
+            margin: 30px 0;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 2px 12px var(--shadow);
+        }
+
+        .highlight {
+            background: linear-gradient(120deg, #fff4e6 0%, #fff4e6 100%);
+            background-repeat: no-repeat;
+            background-size: 100% 40%;
+            background-position: 0 80%;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .definition {
+            font-style: italic;
+            color: var(--accent-blue);
+            font-weight: 600;
+        }
+
+        strong {
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        .toc {
+            background: var(--bg-accent);
+            padding: 30px;
+            border-radius: 8px;
+            margin: 40px 0;
+            box-shadow: 0 2px 12px var(--shadow);
+        }
+
+        .toc h3 {
+            margin-top: 0;
+            color: var(--accent-blue);
+        }
+
+        .toc ul {
+            list-style: none;
+            margin: 0;
+        }
+
+        .toc li {
+            margin: 10px 0;
+        }
+
+        .toc a {
+            color: var(--accent-blue);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .toc a:hover {
+            color: var(--accent-green);
+            text-decoration: underline;
+        }
+
+        .step-box {
+            background: #fff;
+            border-left: 4px solid var(--accent-green);
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 6px;
+            box-shadow: 0 2px 8px var(--shadow);
+        }
+
+        .step-number {
+            display: inline-block;
+            background: var(--accent-green);
+            color: white;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 32px;
+            font-weight: 700;
+            margin-right: 12px;
+        }
+
+        /* Responsive Design */
+        @media screen and (max-width: 1200px) {
+            .container {
+                padding: 40px;
+            }
+            
+            h1 {
+                font-size: 2.5em;
+            }
+            
+            h2 {
+                font-size: 1.9em;
+            }
+        }
+
+        @media screen and (max-width: 992px) {
+            body {
+                font-size: 16px;
+                padding: 15px;
+            }
+            
+            .container {
+                padding: 30px;
+                border-radius: 12px;
+            }
+            
+            h1 {
+                font-size: 2.2em;
+            }
+            
+            h2 {
+                font-size: 1.7em;
+                margin: 50px 0 25px 0;
+            }
+            
+            h3 {
+                font-size: 1.4em;
+            }
+            
+            .comparison-table {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            table {
+                font-size: 0.95em;
+            }
+            
+            th, td {
+                padding: 12px;
+            }
+        }
+
+        @media screen and (max-width: 768px) {
+            body {
+                font-size: 15px;
+                padding: 10px;
+            }
+            
+            .container {
+                padding: 20px;
+                border-radius: 8px;
+            }
+            
+            h1 {
+                font-size: 1.8em;
+                margin-bottom: 15px;
+            }
+            
+            .subtitle {
+                font-size: 1em;
+                margin-bottom: 30px;
+            }
+            
+            h2 {
+                font-size: 1.5em;
+                margin: 40px 0 20px 0;
+            }
+            
+            h3 {
+                font-size: 1.25em;
+                margin: 30px 0 15px 0;
+            }
+            
+            h4 {
+                font-size: 1.1em;
+            }
+            
+            .key-concept,
+            .exam-focus,
+            .visual-diagram {
+                padding: 18px;
+                margin: 18px 0;
+            }
+            
+            .code-block {
+                padding: 15px;
+                font-size: 0.85em;
+                overflow-x: auto;
+            }
+            
+            .formula {
+                padding: 15px;
+                font-size: 1em;
+            }
+            
+            ul, ol {
+                margin: 15px 0 15px 25px;
+            }
+            
+            .step-box {
+                padding: 15px;
+                margin: 12px 0;
+            }
+            
+            .step-number {
+                width: 28px;
+                height: 28px;
+                line-height: 28px;
+                font-size: 0.9em;
+            }
+            
+            .toc {
+                padding: 20px;
+            }
+            
+            /* Make tables scrollable on small screens */
+            table {
+                display: block;
+                overflow-x: auto;
+                white-space: nowrap;
+                font-size: 0.85em;
+            }
+            
+            th, td {
+                padding: 10px 12px;
+            }
+            
+            /* Stack comparison cards */
+            .comparison-table {
+                display: block;
+            }
+            
+            .comparison-card {
+                margin-bottom: 15px;
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            body {
+                font-size: 14px;
+                padding: 5px;
+            }
+            
+            .container {
+                padding: 15px;
+                border-radius: 6px;
+            }
+            
+            h1 {
+                font-size: 1.5em;
+                margin-bottom: 10px;
+            }
+            
+            .subtitle {
+                font-size: 0.9em;
+                margin-bottom: 25px;
+            }
+            
+            h2 {
+                font-size: 1.3em;
+                margin: 35px 0 15px 0;
+                padding-bottom: 10px;
+                border-bottom: 2px solid var(--accent-blue);
+            }
+            
+            h3 {
+                font-size: 1.15em;
+                margin: 25px 0 12px 0;
+            }
+            
+            h4 {
+                font-size: 1.05em;
+                margin: 20px 0 10px 0;
+            }
+            
+            .key-concept,
+            .exam-focus,
+            .visual-diagram,
+            .note-box {
+                padding: 15px;
+                margin: 15px 0;
+            }
+            
+            .code-block {
+                padding: 12px;
+                font-size: 0.8em;
+                border-radius: 6px;
+            }
+            
+            .formula {
+                padding: 12px;
+                font-size: 0.95em;
+            }
+            
+            ul, ol {
+                margin: 12px 0 12px 20px;
+            }
+            
+            li {
+                margin: 8px 0;
+            }
+            
+            .step-box {
+                padding: 12px;
+                margin: 10px 0;
+            }
+            
+            .step-number {
+                width: 24px;
+                height: 24px;
+                line-height: 24px;
+                font-size: 0.85em;
+                margin-right: 8px;
+            }
+            
+            table {
+                font-size: 0.8em;
+            }
+            
+            th {
+                padding: 10px 8px;
+                font-size: 0.9em;
+            }
+            
+            td {
+                padding: 8px;
+            }
+            
+            .toc {
+                padding: 15px;
+                margin: 25px 0;
+            }
+            
+            .toc h3 {
+                font-size: 1.1em;
+            }
+            
+            .toc li {
+                margin: 8px 0;
+            }
+            
+            .toc a {
+                font-size: 0.95em;
+            }
+        }
+
+        @media print {
+            body {
+                background: white;
+            }
+            .container {
+                box-shadow: none;
+            }
+        }
+
+        .note-box {
+            background: #fff9c4;
+            border: 2px solid #f9a825;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+
+        .note-box::before {
+            content: "📝 Note:";
+            font-weight: 700;
+            color: #f57f17;
+            display: block;
+            margin-bottom: 10px;
+        }
+        
+        /* Smooth scroll behavior */
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        /* Better table responsiveness */
+        @media screen and (max-width: 768px) {
+            table thead {
+                display: none;
+            }
+            
+            table, table tbody, table tr, table td {
+                display: block;
+                width: 100%;
+            }
+            
+            table tr {
+                margin-bottom: 15px;
+                border: 2px solid var(--border-light);
+                border-radius: 8px;
+                padding: 10px;
+                background: var(--bg-secondary);
+            }
+            
+            table td {
+                text-align: left;
+                padding: 8px 10px;
+                border: none;
+                position: relative;
+                padding-left: 40%;
+            }
+            
+            table td:before {
+                content: attr(data-label);
+                position: absolute;
+                left: 10px;
+                font-weight: 600;
+                color: var(--accent-blue);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>File Processing</h1>
+        <p class="subtitle">Complete Revision Guide - Final Exam Preparation 2025</p>
+
+        <!-- Table of Contents -->
+        <div class="toc">
+            <h3>📚 Table of Contents</h3>
+            <ul>
+                <li><a href="#chapter1">1. Introduction to File Organization</a></li>
+                <li><a href="#chapter2">2. File Operations & C# Programming</a></li>
+                <li><a href="#chapter3">3. Field & Record Organization</a></li>
+                <li><a href="#chapter4">4. Reclaiming Space (Deletion Strategies)</a></li>
+                <li><a href="#chapter5">5. Binary Search & Indexing</a></li>
+                <li><a href="#chapter6">6. Blocking & Buffering</a></li>
+                <li><a href="#chapter7">7. Disk Storage (HDD vs SSD)</a></li>
+                <li><a href="#chapter8">8. Hashing</a></li>
+                <li><a href="#exam-patterns">9. Common Exam Patterns</a></li>
+            </ul>
+        </div>
+
+        <!-- Chapter 1: Introduction -->
+        <h2 id="chapter1">1. Introduction to File Organization</h2>
+
+        <div class="key-concept">
+            <h4>What is a File?</h4>
+            <p><span class="definition">File:</span> A collection of data placed under secondary or non-volatile storage (e.g., hard drive, SSD, tape).</p>
+        </div>
+
+        <h3>Data Structures vs File Structures</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Aspect</th>
+                    <th>Data Structures</th>
+                    <th>File Structures</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td data-label="Aspect"><strong>Location</strong></td>
+                    <td data-label="Data Structures">Main memory (RAM)</td>
+                    <td data-label="File Structures">Secondary storage (disk)</td>
+                </tr>
+                <tr>
+                    <td data-label="Aspect"><strong>Speed</strong></td>
+                    <td data-label="Data Structures">Fast (~120 nanoseconds)</td>
+                    <td data-label="File Structures">Slow (~30 milliseconds)</td>
+                </tr>
+                <tr>
+                    <td data-label="Aspect"><strong>Persistence</strong></td>
+                    <td data-label="Data Structures">Volatile (lost on power off)</td>
+                    <td data-label="File Structures">Non-volatile (persistent)</td>
+                </tr>
+                <tr>
+                    <td data-label="Aspect"><strong>Size</strong></td>
+                    <td data-label="Data Structures">Small, expensive</td>
+                    <td data-label="File Structures">Large, cheap</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="exam-focus">
+            <strong>Memory vs Disk Speed Analogy:</strong>
+            <ul>
+                <li>Looking at book index: 20 seconds</li>
+                <li>Going to library: 54 days</li>
+                <li>RAM is ~100,000 times faster than disk!</li>
+            </ul>
+        </div>
+
+        <h3>File Structure Types</h3>
+        <div class="comparison-table">
+            <div class="comparison-card">
+                <h4>Logical Structure</h4>
+                <p>How programmers see the file</p>
+                <ul>
+                    <li>Text files</li>
+                    <li>Image files</li>
+                    <li>Data files</li>
+                </ul>
+            </div>
+            <div class="comparison-card">
+                <h4>Physical Structure</h4>
+                <p>How file is stored on disk</p>
+                <ul>
+                    <li>Tracks and sectors</li>
+                    <li>Blocks</li>
+                    <li>Cylinders</li>
+                </ul>
+            </div>
+        </div>
+
+        <h3>File Organization Goals</h3>
+        <div class="key-concept">
+            <ol>
+                <li><strong>Fast Access Time:</strong> Minimize disk trips</li>
+                <li><strong>Good Space Utilization:</strong> Reduce wasted space</li>
+                <li><strong>Efficient Data Retrieval:</strong> Get what you need in one access</li>
+            </ol>
+        </div>
+
+        <!-- Chapter 2: C# File Operations -->
+        <h2 id="chapter2">2. File Operations & C# Programming</h2>
+
+        <h3>Physical vs Logical Files</h3>
+        <div class="key-concept">
+            <p><span class="definition">Physical File:</span> Collection of bytes on disk, known by OS, appears in file directory</p>
+            <p><span class="definition">Logical File:</span> Channel/object in program that links to physical file</p>
+        </div>
+
+        <div class="exam-focus">
+            <strong>Opening Files in C#:</strong>
+            <div class="code-block">FileStream myFile = new FileStream("sample.txt", FileMode.Open, FileAccess.Read);
+StreamReader reader = new StreamReader(myFile);</div>
+        </div>
+
+        <h3>File Modes (MEMORIZE!)</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Mode</th>
+                    <th>Description</th>
+                    <th>File Exists?</th>
+                    <th>File Doesn't Exist?</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td data-label="Mode"><strong>Open</strong></td>
+                    <td data-label="Description">Opens existing file</td>
+                    <td data-label="File Exists?">✅ Opens</td>
+                    <td data-label="File Doesn't Exist?">❌ Error</td>
+                </tr>
+                <tr>
+                    <td data-label="Mode"><strong>Create</strong></td>
+                    <td data-label="Description">Creates new file</td>
+                    <td data-label="File Exists?">⚠️ Deletes & recreates</td>
+                    <td data-label="File Doesn't Exist?">✅ Creates new</td>
+                </tr>
+                <tr>
+                    <td data-label="Mode"><strong>CreateNew</strong></td>
+                    <td data-label="Description">Creates only if doesn't exist</td>
+                    <td data-label="File Exists?">❌ Error</td>
+                    <td data-label="File Doesn't Exist?">✅ Creates new</td>
+                </tr>
+                <tr>
+                    <td data-label="Mode"><strong>Append</strong></td>
+                    <td data-label="Description">Adds to end</td>
+                    <td data-label="File Exists?">✅ Adds to end</td>
+                    <td data-label="File Doesn't Exist?">✅ Creates & adds</td>
+                </tr>
+                <tr>
+                    <td data-label="Mode"><strong>Truncate</strong></td>
+                    <td data-label="Description">Deletes contents</td>
+                    <td data-label="File Exists?">✅ Empties file</td>
+                    <td data-label="File Doesn't Exist?">❌ Error</td>
+                </tr>
+                <tr>
+                    <td data-label="Mode"><strong>OpenOrCreate</strong></td>
+                    <td data-label="Description">Opens or creates</td>
+                    <td data-label="File Exists?">✅ Opens</td>
+                    <td data-label="File Doesn't Exist?">✅ Creates</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>File Access Types</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Access</th>
+                    <th>Can Read?</th>
+                    <th>Can Write?</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>FileAccess.Read</strong></td>
+                    <td>✅</td>
+                    <td>❌</td>
+                </tr>
+                <tr>
+                    <td><strong>FileAccess.Write</strong></td>
+                    <td>❌</td>
+                    <td>✅</td>
+                </tr>
+                <tr>
+                    <td><strong>FileAccess.ReadWrite</strong></td>
+                    <td>✅</td>
+                    <td>✅</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>Seek Operations (HIGH EXAM PROBABILITY!)</h3>
+        <div class="exam-focus">
+            <strong>Seek Syntax:</strong>
+            <div class="code-block">myfile.Seek(offset, SeekOrigin);</div>
+            
+            <h4>SeekOrigin Values:</h4>
+            <ul>
+                <li><strong>SeekOrigin.Begin:</strong> From start of file</li>
+                <li><strong>SeekOrigin.Current:</strong> From current position</li>
+                <li><strong>SeekOrigin.End:</strong> From end of file</li>
+            </ul>
+
+            <h4>Common Exam Questions:</h4>
+            <div class="step-box">
+                <span class="step-number">1</span>
+                <strong>myfile.Seek(10, SeekOrigin.Begin);</strong>
+                <br>→ Moves to byte 10 from start
+            </div>
+            <div class="step-box">
+                <span class="step-number">2</span>
+                <strong>myfile.Seek(5, SeekOrigin.End);</strong>
+                <br>→ Moves 5 bytes AFTER end (invalid for reading)
+            </div>
+            <div class="step-box">
+                <span class="step-number">3</span>
+                <strong>myfile.Seek(-10, SeekOrigin.Current);</strong>
+                <br>→ Moves 10 bytes backward from current position
+            </div>
+            <div class="step-box">
+                <span class="step-number">4</span>
+                <strong>myfile.Seek(0, SeekOrigin.End);</strong>
+                <br>→ Moves to last byte in file
+            </div>
+        </div>
+
+        <!-- Chapter 3: Field & Record Organization -->
+        <h2 id="chapter3">3. Field & Record Organization</h2>
+
+        <h3>Basic Definitions</h3>
+        <div class="key-concept">
+            <p><span class="definition">File:</span> Collection of records</p>
+            <p><span class="definition">Record:</span> Collection of related fields</p>
+            <p><span class="definition">Field:</span> Smallest logically meaningful unit of information</p>
+            <p><span class="definition">Key:</span> Field(s) used to identify a record</p>
+            <ul>
+                <li><strong>Primary Key:</strong> Uniquely identifies a record (e.g., ISBN, ID)</li>
+                <li><strong>Secondary Key:</strong> Non-unique, used for searching (e.g., Author, Department)</li>
+            </ul>
+        </div>
+
+        <h3>Field Organization Methods</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Method</th>
+                    <th>Advantages</th>
+                    <th>Disadvantages</th>
+                    <th>Example</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>1. Fixed Length</strong></td>
+                    <td>Easy to read/write<br>Fast access</td>
+                    <td>Wastes space with padding</td>
+                    <td>ID: 5 chars, Name: 20 chars</td>
+                </tr>
+                <tr>
+                    <td><strong>2. Length Indicator</strong></td>
+                    <td>Easy to jump to end<br>Less waste</td>
+                    <td>Max 255 bytes (1 byte length)<br>Extra bytes needed</td>
+                    <td>05AHMED (5 = length)</td>
+                </tr>
+                <tr>
+                    <td><strong>3. Delimiters</strong></td>
+                    <td>May waste less space<br>Flexible</td>
+                    <td>Must check every byte<br>Delimiter can't appear in data</td>
+                    <td>AHMED|MOHAMED|CS</td>
+                </tr>
+                <tr>
+                    <td><strong>4. Keyword=Value</strong></td>
+                    <td>Self-describing<br>Missing fields allowed</td>
+                    <td>Wastes space with keywords</td>
+                    <td>ID=123|NAME=AHMED</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>Record Organization Types</h3>
+        <div class="comparison-table">
+            <div class="comparison-card">
+                <h4>Fixed-Length Records</h4>
+                <ul>
+                    <li>All records same size</li>
+                    <li>Can use RRN (Relative Record Number)</li>
+                    <li>Direct access possible</li>
+                    <li><strong>Formula:</strong> Byte offset = RRN × Record Length</li>
+                </ul>
+            </div>
+            <div class="comparison-card">
+                <h4>Variable-Length Records</h4>
+                <ul>
+                    <li>Records vary in size</li>
+                    <li>Cannot use RRN</li>
+                    <li>Must use byte offset</li>
+                    <li>Requires index or sequential search</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="exam-focus">
+            <strong>Direct Access Calculation:</strong>
+            <p>Given: RRN = 30, Record Length = 101 bytes</p>
+            <div class="formula">Byte Offset = 30 × 101 = 3030 bytes</div>
+            <p>Then use: <code>myfile.Seek(3030, SeekOrigin.Begin);</code></p>
+        </div>
+
+        <!-- Chapter 4: Reclaiming Space -->
+        <h2 id="chapter4">4. Reclaiming Space in Files</h2>
+
+        <div class="exam-focus">
+            <p>⚠️ <strong>THIS IS THE MOST IMPORTANT EXAM TOPIC!</strong> ⚠️</p>
+            <p>Questions 2 and parts of Question 5 in both 2024 and 2025 finals focused heavily on this topic.</p>
+        </div>
+
+        <h3>Deletion Strategies</h3>
+
+        <h4>1. Record Deletion & Storage Compaction</h4>
+        <div class="key-concept">
+            <ul>
+                <li>Mark record as deleted (e.g., place '*' at beginning)</li>
+                <li>Space not immediately released</li>
+                <li>Later: run compaction program to squeeze file</li>
+                <li><strong>Disadvantage:</strong> Wasted space until compaction</li>
+            </ul>
+        </div>
+
+        <h4>2. Dynamic Space Reclamation with AVAIL LIST</h4>
+        <div class="key-concept">
+            <p><span class="definition">AVAIL LIST:</span> A linked list (stack) of available deleted records</p>
+            <ul>
+                <li>Header record stores beginning of list (-1 = empty)</li>
+                <li>When record deleted: marked and added to AVAIL LIST</li>
+                <li>When record added: use space from AVAIL LIST</li>
+            </ul>
+        </div>
+
+        <h3>Placement Strategies (CRITICAL FOR EXAMS!)</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Strategy</th>
+                    <th>List Sorting</th>
+                    <th>Selection Method</th>
+                    <th>Best For</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>First-Fit</strong></td>
+                    <td>Not sorted</td>
+                    <td>First record large enough</td>
+                    <td>Fast insertion, simple</td>
+                </tr>
+                <tr>
+                    <td><strong>Best-Fit</strong></td>
+                    <td>Ascending by size</td>
+                    <td>Smallest record that fits</td>
+                    <td>Minimize internal fragmentation</td>
+                </tr>
+                <tr>
+                    <td><strong>Worst-Fit</strong></td>
+                    <td>Descending by size</td>
+                    <td>Largest record available</td>
+                    <td>Minimize external fragmentation</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="exam-focus">
+            <h4>Placement Strategy Example (COMMON EXAM QUESTION):</h4>
+            <p><strong>Given AVAIL LIST:</strong> size=60, size=50, size=22, size=10</p>
+            <p><strong>Record to add:</strong> size=20</p>
+            
+            <div class="step-box">
+                <span class="step-number">1</span>
+                <strong>First-Fit:</strong> Uses size=60 (first one that fits)
+            </div>
+            <div class="step-box">
+                <span class="step-number">2</span>
+                <strong>Best-Fit (sorted: 10,22,50,60):</strong> Uses size=22 (smallest that fits)
+            </div>
+            <div class="step-box">
+                <span class="step-number">3</span>
+                <strong>Worst-Fit (sorted: 60,50,22,10):</strong> Uses size=60 (largest)
+            </div>
+        </div>
+
+        <h3>Fragmentation Types</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Type</th>
+                    <th>Location</th>
+                    <th>Cause</th>
+                    <th>Example</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Internal Fragmentation</strong></td>
+                    <td>Inside records</td>
+                    <td>Record smaller than allocated space</td>
+                    <td>Record size=20, space=29<br>→ 9 bytes wasted</td>
+                </tr>
+                <tr>
+                    <td><strong>External Fragmentation</strong></td>
+                    <td>Between records (in AVAIL LIST)</td>
+                    <td>Space too small to reuse</td>
+                    <td>Remaining space=5 bytes<br>(too small for any record)</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>Fixed-Length Record AVAIL LIST (Stack Implementation)</h3>
+        <div class="exam-focus">
+            <p><strong>Initial File:</strong> A, B, C, D, E (RRN: 0-4)</p>
+            
+            <div class="step-box">
+                <span class="step-number">1</span>
+                <strong>Delete RRN=2:</strong>
+                <br>File: A, B, *-1, D, E
+                <br>List head → 2
+            </div>
+            
+            <div class="step-box">
+                <span class="step-number">2</span>
+                <strong>Delete RRN=4:</strong>
+                <br>File: A, B, *-1, D, *2
+                <br>List head → 4 (points to 2, which points to -1)
+            </div>
+            
+            <div class="step-box">
+                <span class="step-number">3</span>
+                <strong>Add record F:</strong>
+                <br>File: A, B, *-1, D, F
+                <br>List head → 2 (F takes RRN=4)
+            </div>
+        </div>
+
+        <h3>Variable-Length Record AVAIL LIST</h3>
+        <div class="exam-focus">
+            <p>Format in deleted record: <code>*NextAddress|Size|</code></p>
+            <p>Example: <code>*-1|50|</code> means: size=50, no next record (-1)</p>
+            
+            <strong>Key Differences from Fixed-Length:</strong>
+            <ul>
+                <li>Store size in deleted record</li>
+                <li>Use byte offset instead of RRN</li>
+                <li>Check if new record fits in available space</li>
+                <li>Handle leftover space (internal/external fragmentation)</li>
+            </ul>
+        </div>
+
+        <!-- Chapter 5: Binary Search & Indexing -->
+        <h2 id="chapter5">5. Binary Search & Indexing</h2>
+
+        <h3>Sequential vs Binary Search</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Aspect</th>
+                    <th>Sequential Search</th>
+                    <th>Binary Search</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Time Complexity</strong></td>
+                    <td>O(n)</td>
+                    <td>O(log₂ n)</td>
+                </tr>
+                <tr>
+                    <td><strong>Average Reads</strong></td>
+                    <td>n/2 records</td>
+                    <td>1 + log₂ n records</td>
+                </tr>
+                <tr>
+                    <td><strong>For 2000 records</strong></td>
+                    <td>~1000 reads</td>
+                    <td>~11 reads</td>
+                </tr>
+                <tr>
+                    <td><strong>Requirement</strong></td>
+                    <td>No sorting needed</td>
+                    <td>File must be sorted</td>
+                </tr>
+                <tr>
+                    <td><strong>Record Type</strong></td>
+                    <td>Any</td>
+                    <td>Fixed-length only</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>Indexing Concepts</h3>
+        <div class="key-concept">
+            <p><span class="definition">Index:</span> A tool for finding records quickly - consists of key field + reference (address/RRN)</p>
+            
+            <h4>Benefits of Indexing:</h4>
+            <ul>
+                <li>Impose order without rearranging file</li>
+                <li>Multiple access paths (multiple indexes)</li>
+                <li>Works with variable-length records</li>
+                <li>Index file is much smaller than data file</li>
+                <li>Can keep index in RAM for fast binary search</li>
+            </ul>
+        </div>
+
+        <h3>Index Types</h3>
+        <div class="comparison-table">
+            <div class="comparison-card">
+                <h4>Primary Index</h4>
+                <ul>
+                    <li>Built on primary key field</li>
+                    <li>Unique entries (1-to-1)</li>
+                    <li>Example: Course Code → Address</li>
+                </ul>
+            </div>
+            <div class="comparison-card">
+                <h4>Secondary Index</h4>
+                <ul>
+                    <li>Built on secondary key field</li>
+                    <li>Non-unique (1-to-many)</li>
+                    <li>Example: Department → List of Courses</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="exam-focus">
+            <h4>Index Operations (Question 5 in 2024/2025 Exams):</h4>
+            <ol>
+                <li><strong>Create:</strong> Build empty index and data files</li>
+                <li><strong>Load:</strong> Read index into memory</li>
+                <li><strong>Rewrite:</strong> Write index back to disk</li>
+                <li><strong>Add:</strong> Append data file, insert in index (sorted)</li>
+                <li><strong>Delete:</strong> Remove from index, mark in data file</li>
+                <li><strong>Update:</strong> Modify data file, update index if key changed</li>
+            </ol>
+        </div>
+
+        <h3>Using Multiple Indexes for Queries</h3>
+        <div class="exam-focus">
+            <p><strong>Example Query:</strong> Find all second-year computer science courses in first semester</p>
+            
+            <div class="step-box">
+                <span class="step-number">1</span>
+                Search Department Index for "Computer Science" → List A
+            </div>
+            <div class="step-box">
+                <span class="step-number">2</span>
+                Search Class Index for "2" → List B
+            </div>
+            <div class="step-box">
+                <span class="step-number">3</span>
+                Search Semester Index for "1" → List C
+            </div>
+            <div class="step-box">
+                <span class="step-number">4</span>
+                Perform logical AND: List A ∩ List B ∩ List C → Final Result
+            </div>
+        </div>
+
+        <!-- Chapter 6: Blocking & Buffering -->
+        <h2 id="chapter6">6. Blocking & Buffering</h2>
+
+        <h3>Key Concepts</h3>
+        <div class="key-concept">
+            <p><span class="definition">Blocking:</span> Grouping multiple records into fixed-size blocks to reduce I/O operations</p>
+            <p><span class="definition">Buffering:</span> Using memory buffers as intermediaries between CPU and storage</p>
+        </div>
+
+        <h3>Blocking</h3>
+        <div class="exam-focus">
+            <h4>I/O Operations Formula:</h4>
+            <div class="formula">Number of I/O operations = ⌈Records / Block Size⌉</div>
+            
+            <strong>Example (COMMON EXAM QUESTION):</strong>
+            <p>10,000 records with block size of 200 records:</p>
+            <div class="formula">I/O operations = ⌈10,000 / 200⌉ = 50</div>
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Aspect</th>
+                    <th>Advantages</th>
+                    <th>Disadvantages</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Blocking</strong></td>
+                    <td>• Reduces I/O overhead<br>• Efficient for sequential access<br>• Better performance</td>
+                    <td>• Uses memory space<br>• Latency for small reads/writes</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>Buffering Types</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Feature</th>
+                    <th>Single Buffering</th>
+                    <th>Double Buffering</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Memory</strong></td>
+                    <td>One buffer</td>
+                    <td>Two buffers</td>
+                </tr>
+                <tr>
+                    <td><strong>Performance</strong></td>
+                    <td>Limited parallelism<br>CPU or I/O may be idle</td>
+                    <td>Overlaps CPU and I/O<br>Minimizes idle time</td>
+                </tr>
+                <tr>
+                    <td><strong>Implementation</strong></td>
+                    <td>Simple</td>
+                    <td>More complex</td>
+                </tr>
+                <tr>
+                    <td><strong>Applications</strong></td>
+                    <td>Small-scale systems</td>
+                    <td>Real-time, high-performance systems</td>
+                </tr>
+                <tr>
+                    <td><strong>Operation</strong></td>
+                    <td>I/O fills buffer<br>→ CPU processes<br>→ Repeat</td>
+                    <td>I/O fills Buffer 1<br>CPU processes Buffer 2<br>(simultaneous)</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="exam-focus">
+            <h4>True/False Questions (From 2025 Exam):</h4>
+            <ol>
+                <li><strong>Single buffering is more complex than double buffering.</strong> → FALSE</li>
+                <li><strong>Double buffering requires two buffers, allowing overlap between CPU and I/O.</strong> → TRUE</li>
+                <li><strong>Blocking minimizes I/O overhead by grouping records into smaller chunks.</strong> → FALSE (larger chunks, not smaller)</li>
+            </ol>
+        </div>
+
+        <h3>Blocking vs Buffering Comparison</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Feature</th>
+                    <th>Blocking</th>
+                    <th>Buffering</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Focus</strong></td>
+                    <td>Grouping multiple records</td>
+                    <td>Temporary storage in memory</td>
+                </tr>
+                <tr>
+                    <td><strong>Primary Use</strong></td>
+                    <td>Reducing I/O frequency</td>
+                    <td>Bridging speed differences</td>
+                </tr>
+                <tr>
+                    <td><strong>Memory Use</strong></td>
+                    <td>Uses memory for blocks (larger)</td>
+                    <td>Uses smaller memory buffers</td>
+                </tr>
+                <tr>
+                    <td><strong>Complexity</strong></td>
+                    <td>Relatively simple</td>
+                    <td>Can be complex (double buffering)</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- Chapter 7: Disk Storage -->
+        <h2 id="chapter7">7. Disk Storage (HDD vs SSD)</h2>
+
+        <h3>Hard Disk Drive (HDD) Organization</h3>
+        <div class="key-concept">
+            <h4>Components:</h4>
+            <ul>
+                <li><strong>Platter:</strong> Circular disk where data is stored</li>
+                <li><strong>Track:</strong> Concentric circle on platter surface</li>
+                <li><strong>Sector:</strong> Smallest addressable portion (typically 512 bytes)</li>
+                <li><strong>Cylinder:</strong> Set of tracks directly above/below each other</li>
+                <li><strong>Cluster:</strong> Fixed number of contiguous sectors</li>
+                <li><strong>Extent:</strong> Group of contiguous clusters</li>
+            </ul>
+        </div>
+
+        <h3>Disk Capacity Formulas (MEMORIZE!)</h3>
+        <div class="exam-focus">
+            <div class="formula">Track Capacity = Sectors per Track × Bytes per Sector</div>
+            <div class="formula">Cylinder Capacity = Number of Surfaces × Track Capacity</div>
+            <div class="formula">Disk Capacity = Number of Cylinders × Cylinder Capacity</div>
+            
+            <h4>Example Problem:</h4>
+            <p>Given: 80 tracks/surface, 100 sectors/track, 512 bytes/sector, 2 surfaces</p>
+            <div class="step-box">
+                <span class="step-number">1</span>
+                Track Capacity = 100 × 512 = 51,200 bytes = 50 KB
+            </div>
+            <div class="step-box">
+                <span class="step-number">2</span>
+                Cylinder Capacity = 2 × 50 = 100 KB
+            </div>
+            <div class="step-box">
+                <span class="step-number">3</span>
+                Disk Capacity = 80 × 100 = 8,000 KB
+            </div>
+        </div>
+
+        <h3>HDD Access Time Components</h3>
+        <div class="key-concept">
+            <ol>
+                <li><strong>Seek Time:</strong> Move arm to correct cylinder</li>
+                <li><strong>Rotational Delay (Latency):</strong> Wait for sector to rotate under head</li>
+                <li><strong>Transfer Time:</strong> Time to read/write data</li>
+            </ol>
+            <div class="formula">Transfer Time = (Bytes Transferred / Bytes on Track) × Rotation Time</div>
+        </div>
+
+        <h3>HDD vs SSD Comparison (CRITICAL FOR EXAMS!)</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Feature</th>
+                    <th>HDD</th>
+                    <th>SSD</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td data-label="Feature"><strong>Full Form</strong></td>
+                    <td data-label="HDD">Hard Disk Drive</td>
+                    <td data-label="SSD">Solid State Drive</td>
+                </tr>
+                <tr>
+                    <td data-label="Feature"><strong>Movement</strong></td>
+                    <td data-label="HDD">Spinning platters + moving arm</td>
+                    <td data-label="SSD">No moving parts</td>
+                </tr>
+                <tr>
+                    <td data-label="Feature"><strong>Speed</strong></td>
+                    <td data-label="HDD">Slower (~80 MB/s)</td>
+                    <td data-label="SSD">Faster (~500 MB/s)</td>
+                </tr>
+                <tr>
+                    <td data-label="Feature"><strong>Latency</strong></td>
+                    <td data-label="HDD">High (seek + rotation)</td>
+                    <td data-label="SSD">Low (instant access)</td>
+                </tr>
+                <tr>
+                    <td data-label="Feature"><strong>Storage Capacity</strong></td>
+                    <td data-label="HDD">250 GB - 14 TB</td>
+                    <td data-label="SSD">120 GB - 4 TB</td>
+                </tr>
+                <tr>
+                    <td data-label="Feature"><strong>Read/Write Time</strong></td>
+                    <td data-label="HDD">Longer</td>
+                    <td data-label="SSD">Shorter</td>
+                </tr>
+                <tr>
+                    <td data-label="Feature"><strong>Weight</strong></td>
+                    <td data-label="HDD">Heavier</td>
+                    <td data-label="SSD">Lighter</td>
+                </tr>
+                <tr>
+                    <td data-label="Feature"><strong>Power Consumption</strong></td>
+                    <td data-label="HDD">Higher (spinning)</td>
+                    <td data-label="SSD">Lower</td>
+                </tr>
+                <tr>
+                    <td data-label="Feature"><strong>Cost</strong></td>
+                    <td data-label="HDD">Cheaper</td>
+                    <td data-label="SSD">More expensive</td>
+                </tr>
+                <tr>
+                    <td data-label="Feature"><strong>Size</strong></td>
+                    <td data-label="HDD">Larger</td>
+                    <td data-label="SSD">Smaller</td>
+                </tr>
+                <tr>
+                    <td data-label="Feature"><strong>Reliability</strong></td>
+                    <td data-label="HDD">Less reliable (mechanical failure)</td>
+                    <td data-label="SSD">More reliable</td>
+                </tr>
+                <tr>
+                    <td data-label="Feature"><strong>Access Type</strong></td>
+                    <td data-label="HDD">Sequential and random</td>
+                    <td data-label="SSD">Instant random access</td>
+                </tr>
+                <tr>
+                    <td data-label="Feature"><strong>Fragmentation Impact</strong></td>
+                    <td data-label="HDD">Significant (needs defrag)</td>
+                    <td data-label="SSD">Irrelevant</td>
+                </tr>
+                <tr>
+                    <td data-label="Feature"><strong>Best For</strong></td>
+                    <td data-label="HDD">Large storage, archival, backups</td>
+                    <td data-label="SSD">OS, applications, real-time processing</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="exam-focus">
+            <h4>Real-World Comparison (Common Exam Questions):</h4>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Scenario</th>
+                        <th>HDD</th>
+                        <th>SSD</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Booting OS</strong></td>
+                        <td>30-40 seconds</td>
+                        <td>10-15 seconds</td>
+                    </tr>
+                    <tr>
+                        <td><strong>1 GB File Transfer</strong></td>
+                        <td>~15 seconds (80 MB/s)</td>
+                        <td>~2 seconds (500 MB/s)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Gaming (Level Load)</strong></td>
+                        <td>Longer load times</td>
+                        <td>Near-instant loading</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Chapter 8: Hashing -->
+        <h2 id="chapter8">8. Hashing</h2>
+
+        <h3>Core Concepts</h3>
+        <div class="key-concept">
+            <p><span class="definition">Hash Function:</span> h(k) transforms a key into an address</p>
+            <p><span class="definition">Home Address:</span> The address computed by hash function for a key</p>
+            <p><span class="definition">Collision:</span> Two different keys map to the same address</p>
+            <p><span class="definition">Synonyms:</span> Keys that hash to the same address</p>
+            <p><span class="definition">Bucket:</span> Logical storage unit for records with same hash value</p>
+        </div>
+
+        <h3>Time Complexity Comparison</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Method</th>
+                    <th>Time Complexity</th>
+                    <th>Notes</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Simple Index (Binary Search)</strong></td>
+                    <td>O(log₂ N)</td>
+                    <td>Good for sorted data</td>
+                </tr>
+                <tr>
+                    <td><strong>B-Trees / B+ Trees</strong></td>
+                    <td>O(log_k N)</td>
+                    <td>Better than binary search</td>
+                </tr>
+                <tr>
+                    <td><strong>Hashing</strong></td>
+                    <td>O(1)</td>
+                    <td>Best average case!</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>Hash Function Examples</h3>
+        <div class="exam-focus">
+            <h4>Common Hash Function Structure:</h4>
+            <div class="code-block">int hash(string key) {
+    int h;
+    h = 2*key[0] + 3*key[1] + 6*key[2];
+    return (h mod 13);
+}</div>
+
+            <h4>Example Problem (FROM 2025 EXAM):</h4>
+            <p>Given: ASCII(O)=79, ASCII(W)=119, ASCII(L)=76</p>
+            <p><strong>Find h("Owl") and h("Low"):</strong></p>
+            
+            <div class="step-box">
+                <span class="step-number">1</span>
+                h("Owl") = (2×79 + 3×119 + 6×108) mod 13
+                <br>= (158 + 357 + 648) mod 13
+                <br>= 1163 mod 13 = <strong>6</strong>
+            </div>
+            
+            <div class="step-box">
+                <span class="step-number">2</span>
+                h("Low") = (2×76 + 3×111 + 6×119) mod 13
+                <br>= (152 + 333 + 714) mod 13
+                <br>= 1199 mod 13 = <strong>4</strong>
+            </div>
+        </div>
+
+        <h3>Collision Resolution: Progressive Overflow</h3>
+        <div class="key-concept">
+            <h4>Insertion Algorithm:</h4>
+            <ol>
+                <li>Go to home address h(k)</li>
+                <li>If free, place key there</li>
+                <li>If occupied, try next position</li>
+                <li>Wrap around if reach end (last → 0)</li>
+                <li>Continue until empty position found</li>
+            </ol>
+
+            <h4>Search Algorithm:</h4>
+            <ol>
+                <li>Go to home address h(k)</li>
+                <li>If key found, done</li>
+                <li>If empty, key not in table</li>
+                <li>Otherwise try next position</li>
+                <li>Stop when: found, empty, or back to home</li>
+            </ol>
+        </div>
+
+        <div class="exam-focus">
+            <h4>Progressive Overflow Example (VERY COMMON IN EXAMS):</h4>
+            <p><strong>Given:</strong> Hash function: key mod 11</p>
+            <p><strong>Keys:</strong> 37, 48, 4, 15, 26, 125, 39, 6</p>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>Address</th>
+                        <th>Key</th>
+                        <th>Home Address</th>
+                        <th>Search Length</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>0</td><td>-</td><td>-</td><td>-</td></tr>
+                    <tr><td>1</td><td>-</td><td>-</td><td>-</td></tr>
+                    <tr><td>2</td><td>-</td><td>-</td><td>-</td></tr>
+                    <tr><td>3</td><td>125</td><td>4</td><td>6</td></tr>
+                    <tr><td>4</td><td>4</td><td>4</td><td>1</td></tr>
+                    <tr><td>5</td><td>15</td><td>4</td><td>2</td></tr>
+                    <tr><td>6</td><td>26</td><td>4</td><td>3</td></tr>
+                    <tr><td>7</td><td>39</td><td>6</td><td>5</td></tr>
+                    <tr><td>8</td><td>6</td><td>6</td><td>6</td></tr>
+                    <tr><td>9</td><td>-</td><td>-</td><td>-</td></tr>
+                    <tr><td>10</td><td>37</td><td>4</td><td>4</td></tr>
+                </tbody>
+            </table>
+            
+            <div class="formula">Average Search Length = (1+2+3+4+5+6+5+6) / 8 = 32/8 = 4</div>
+        </div>
+
+        <h3>Search Length Calculation</h3>
+        <div class="key-concept">
+            <p><span class="definition">Search Length:</span> Number of accesses required to retrieve a record</p>
+            <div class="formula">Average Search Length = (Sum of all search lengths) / (Number of records)</div>
+        </div>
+
+        <!-- Exam Patterns -->
+        <h2 id="exam-patterns">9. Common Exam Patterns & Tips</h2>
+
+        <div class="exam-focus">
+            <h3>Question 1: True/False & Operations (10 points)</h3>
+            <h4>Part A: True/False Statements</h4>
+            <ul>
+                <li>Focus on: Buffering, Blocking, Fragmentation, RRN usage</li>
+                <li>Common tricks: "minimize" vs "maximize", "smaller" vs "larger"</li>
+                <li>Always correct FALSE statements!</li>
+            </ul>
+
+            <h4>Part B: File Operations</h4>
+            <ul>
+                <li><strong>Seek operations:</strong> Know all three SeekOrigin types</li>
+                <li><strong>FileMode:</strong> Memorize all 6 modes and their behaviors</li>
+                <li><strong>FileAccess:</strong> Know Read/Write/ReadWrite differences</li>
+            </ul>
+        </div>
+
+        <div class="exam-focus">
+            <h3>Question 2: Placement Strategies (10 points)</h3>
+            <p><strong>ALWAYS APPEARS IN EXAMS!</strong></p>
+            
+            <h4>What to Expect:</h4>
+            <ol>
+                <li>Explain First-fit, Best-fit, Worst-fit</li>
+                <li>Which strategy minimizes search? <strong>Answer: First-fit</strong></li>
+                <li>Given file with records + AVAIL LIST:
+                    <ul>
+                        <li>Delete records → Update AVAIL LIST</li>
+                        <li>Add records → Use placement strategy</li>
+                        <li>Show final AVAIL LIST state</li>
+                    </ul>
+                </li>
+            </ol>
+
+            <h4>Step-by-Step Approach:</h4>
+            <div class="step-box">
+                <span class="step-number">1</span>
+                Draw initial file with sizes and addresses
+            </div>
+            <div class="step-box">
+                <span class="step-number">2</span>
+                For deletions: Mark as deleted, add to AVAIL LIST (stack)
+            </div>
+            <div class="step-box">
+                <span class="step-number">3</span>
+                For insertions: Apply placement strategy, check fit
+            </div>
+            <div class="step-box">
+                <span class="step-number">4</span>
+                Update AVAIL LIST after each operation
+            </div>
+            <div class="step-box">
+                <span class="step-number">5</span>
+                Show final AVAIL LIST with sizes
+            </div>
+        </div>
+
+        <div class="exam-focus">
+            <h3>Question 3: Blocking & Buffering (10 points)</h3>
+            <ol>
+                <li><strong>Difference between Block and Buffering</strong>
+                    <ul>
+                        <li>Block: Grouping records</li>
+                        <li>Buffering: Memory intermediary</li>
+                    </ul>
+                </li>
+                <li><strong>3 Advantages & 3 Disadvantages</strong> (for each: Block, Single Buffer, Double Buffer)</li>
+                <li><strong>HDD vs SSD differences</strong> (See comparison table above)</li>
+                <li><strong>I/O Operations calculation:</strong> Use formula ⌈Records / Block Size⌉</li>
+            </ol>
+        </div>
+
+        <div class="exam-focus">
+            <h3>Question 4: Hashing (15 points)</h3>
+            <ol>
+                <li><strong>Define:</strong> Hash function, Home address, Collision</li>
+                <li><strong>Ways to reduce collisions:</strong>
+                    <ul>
+                        <li>Good hash function (uniform distribution)</li>
+                        <li>Larger address space</li>
+                        <li>Prime number modulus</li>
+                    </ul>
+                </li>
+                <li><strong>Progressive Overflow steps</strong> (See algorithm above)</li>
+                <li><strong>Calculate hash values</strong> (Given ASCII codes)</li>
+                <li><strong>Draw hash table + Calculate search lengths</strong>
+                    <ul>
+                        <li>Insert keys using progressive overflow</li>
+                        <li>Calculate search length for each</li>
+                        <li>Compute average search length</li>
+                    </ul>
+                </li>
+            </ol>
+        </div>
+
+        <div class="exam-focus">
+            <h3>Question 5: Indexing (15 points)</h3>
+            <p><strong>Most Complex Question!</strong></p>
+            
+            <ol>
+                <li><strong>Operations to maintain indexed file:</strong>
+                    <ul>
+                        <li>Create, Load, Rewrite, Add, Delete, Update</li>
+                    </ul>
+                </li>
+                <li><strong>Design indexing system:</strong>
+                    <ul>
+                        <li>Identify primary key (unique field)</li>
+                        <li>Identify secondary keys (non-unique searchable fields)</li>
+                        <li>Build primary index (key → address)</li>
+                        <li>Build secondary indexes (secondary key → list of primary keys)</li>
+                        <li>Use indexes to answer queries (logical AND for multiple conditions)</li>
+                    </ul>
+                </li>
+            </ol>
+
+            <h4>Example Table Structure:</h4>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Course Code</th>
+                        <th>Department</th>
+                        <th>Class</th>
+                        <th>Semester</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>323</td><td>3</td><td>1</td><td>1</td></tr>
+                    <tr><td>211</td><td>2</td><td>1</td><td>1</td></tr>
+                </tbody>
+            </table>
+            
+            <p><strong>Primary Index:</strong> Course Code → Address (sorted by key)</p>
+            <p><strong>Secondary Indexes:</strong> Department, Class, Semester → Course Codes</p>
+        </div>
+
+        <h3>Final Exam Tips</h3>
+        <div class="note-box">
+            <ul>
+                <li><strong>Time Management:</strong> 120 minutes for 60 points = 2 min/point</li>
+                <li><strong>Question Priority:</strong> Q1 & Q4 are usually fastest → do first</li>
+                <li><strong>Show Your Work:</strong> Especially for Q2 (AVAIL LIST), Q4 (search length), Q5 (indexes)</li>
+                <li><strong>Draw Diagrams:</strong> Visual representation earns partial credit</li>
+                <li><strong>Check Formulas:</strong> Disk capacity, I/O operations, search length</li>
+                <li><strong>Review Past Papers:</strong> Questions repeat with different numbers!</li>
+            </ul>
+        </div>
+
+        <h3>Key Formulas Summary</h3>
+        <div class="key-concept">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Formula</th>
+                        <th>Usage</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Byte Offset = RRN × Record Length</strong></td>
+                        <td>Fixed-length record access</td>
+                    </tr>
+                    <tr>
+                        <td><strong>I/O Operations = ⌈Records / Block Size⌉</strong></td>
+                        <td>Blocking efficiency</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Track Capacity = Sectors × Bytes/Sector</strong></td>
+                        <td>Disk capacity</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Cylinder Capacity = Surfaces × Track Capacity</strong></td>
+                        <td>Disk capacity</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Disk Capacity = Cylinders × Cylinder Capacity</strong></td>
+                        <td>Total disk size</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Avg Search Length = Σ(lengths) / Records</strong></td>
+                        <td>Hashing performance</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="visual-diagram">
+            <h3>🎯 Exam Success Checklist</h3>
+            <div style="text-align: left; max-width: 800px; margin: 0 auto;">
+                <p>✅ Memorized all File Modes and their behaviors</p>
+                <p>✅ Can explain First-fit, Best-fit, Worst-fit</p>
+                <p>✅ Know how to draw and update AVAIL LIST</p>
+                <p>✅ Understand Seek operations (Begin, Current, End)</p>
+                <p>✅ Memorized HDD vs SSD comparison table</p>
+                <p>✅ Can calculate disk capacity with formulas</p>
+                <p>✅ Know difference between blocking and buffering</p>
+                <p>✅ Can calculate I/O operations</p>
+                <p>✅ Understand Progressive Overflow algorithm</p>
+                <p>✅ Can calculate hash values and search lengths</p>
+                <p>✅ Know how to build primary and secondary indexes</p>
+                <p>✅ Can use multiple indexes for queries (logical AND)</p>
+            </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 60px; padding: 30px; background: var(--bg-accent); border-radius: 8px;">
+            <h2 style="color: var(--accent-blue); margin-bottom: 20px;">Good Luck on Your Final Exam! 🎓</h2>
+            <p style="color: var(--text-secondary); font-size: 1.1em;">Study smart, practice problems, and trust your preparation!</p>
+        </div>
+
+    </div>
+</body>
+</html>
